@@ -49,6 +49,11 @@ class MovieRepository(
 
     val hasAi: Boolean get() = gemini != null
 
+    /** Titles the user has focused on this session; they rank lower in new rows. */
+    private val seen = ConcurrentHashMap.newKeySet<String>()
+
+    fun markSeen(id: String) { seen += id }
+
     init {
         enrichmentCache?.let { cache ->
             val cached = cache.load()
@@ -94,13 +99,13 @@ class MovieRepository(
         source: MediaItem,
         filters: DiscoveryFilters,
         excludeIds: Set<String> = emptySet(),
-        limit: Int = 12,
+        limit: Int = 20,
     ): List<MediaItem> {
         val all = _catalog.value.values
         val boosted = aiSuggestions[source.id].orEmpty()
-        return RecommendationEngine.rank(source, all, filters, excludeIds, boosted, limit)
-            .ifEmpty { RecommendationEngine.rank(source, all, filters, setOf(source.id), boosted, limit) }
-            .ifEmpty { RecommendationEngine.rank(source, all, DiscoveryFilters(), excludeIds, boosted, limit) }
+        return RecommendationEngine.rank(source, all, filters, excludeIds, boosted, limit, seen)
+            .ifEmpty { RecommendationEngine.rank(source, all, filters, setOf(source.id), boosted, limit, seen) }
+            .ifEmpty { RecommendationEngine.rank(source, all, DiscoveryFilters(), excludeIds, boosted, limit, seen) }
     }
 
     fun explain(source: MediaItem, candidate: MediaItem): ScoreBreakdown =

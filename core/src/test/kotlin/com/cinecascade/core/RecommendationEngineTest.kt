@@ -65,3 +65,43 @@ class RecommendationEngineTest {
         assertTrue("The Hobbit: An Unexpected Journey" in recs, recs.toString())
     }
 }
+
+class DiscoveryVarietyTest {
+    @Test
+    fun catalogIsLarge() {
+        assertTrue(Catalog.items.size >= 250, "only ${Catalog.items.size} titles")
+        assertTrue(Catalog.themes.size >= 12)
+    }
+
+    @Test
+    fun rowsAreLongAndIncludeWildcards() {
+        val src = Catalog.items.first { it.title == "Interstellar" }
+        val strict = RecommendationEngine.rank(src, Catalog.items, DiscoveryFilters(), emptySet(), limit = 6)
+        val row = RecommendationEngine.rank(src, Catalog.items, DiscoveryFilters(), emptySet(), limit = 20)
+        assertEquals(20, row.size)
+        assertEquals(strict, row.take(6), "closest matches stay first")
+        assertEquals(row, RecommendationEngine.rank(src, Catalog.items, DiscoveryFilters(), emptySet(), limit = 20), "stable per source")
+    }
+
+    @Test
+    fun seenTitlesDropDown() {
+        val src = Catalog.items.first { it.title == "Interstellar" }
+        val first = RecommendationEngine.rank(src, Catalog.items, DiscoveryFilters(), emptySet(), limit = 20).first()
+        val after = RecommendationEngine.rank(src, Catalog.items, DiscoveryFilters(), emptySet(), limit = 20, seenIds = setOf(first.id))
+        assertTrue(after.indexOf(first) != 0)
+    }
+
+    @Test
+    fun longWalkVisitsManyDifferentTitles() {
+        val repo = com.cinecascade.core.repository.MovieRepository(kotlinx.coroutines.test.TestScope())
+        var current = Catalog.items.first { it.title == "Interstellar" }
+        val visited = linkedSetOf(current.id)
+        repeat(60) {
+            repo.markSeen(current.id)
+            current = repo.findRecommendations(current, DiscoveryFilters(), visited).first()
+            visited += current.id
+        }
+        assertEquals(61, visited.size)
+        assertTrue(visited.map { id -> Catalog.items.first { it.id == id }.themeId }.toSet().size >= 4, "walk should cross vibes")
+    }
+}

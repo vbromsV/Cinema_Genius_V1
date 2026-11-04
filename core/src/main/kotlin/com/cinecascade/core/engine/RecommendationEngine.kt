@@ -3,6 +3,7 @@ package com.cinecascade.core.engine
 import com.cinecascade.core.model.DiscoveryFilters
 import com.cinecascade.core.model.MediaItem
 import kotlin.math.abs
+import kotlin.random.Random
 
 /** Result of scoring one candidate against a source title. */
 data class ScoreBreakdown(val total: Int, val reasons: List<String>)
@@ -25,6 +26,8 @@ object RecommendationEngine {
     const val RATING_NEAR = 1
     const val SAME_FORMAT = 2
     const val AI_BOOST = 12
+    const val SEEN_PENALTY = 8
+    private const val EXPLORE_MIN_ROW = 8
 
     private const val CAST_DEPTH = 5
 
@@ -115,18 +118,28 @@ object RecommendationEngine {
         excludeIds: Set<String>,
         aiSuggested: Set<String> = emptySet(),
         limit: Int = 12,
-    ): List<MediaItem> =
-        candidates.asSequence()
+        /** Titles the user has already seen: pushed down so the journey keeps finding new ground. */
+        seenIds: Set<String> = emptySet(),
+    ): List<MediaItem> {
+        val sorted = candidates.asSequence()
             .filter { it.id != source.id && it.id !in excludeIds && filters.matches(it) }
-            .map { it to score(source, it, it.id in aiSuggested).total }
+            .map { it to score(source, it, it.id in aiSuggested).total - if (it.id in seenIds) SEEN_PENALTY else 0 }
             .sortedWith(
                 compareByDescending<Pair<MediaItem, Int>> { it.second }
                     .thenByDescending { it.first.rating }
                     .thenBy { it.first.title },
             )
-            .take(limit)
             .map { it.first }
             .toList()
+        if (limit < EXPLORE_MIN_ROW) return sorted.take(limit)
+        // Two thirds are the closest matches; the rest are wildcards from the next-best pool, picked
+        // with a seed derived from the source so the same title always shows the same row.
+        val topCount = limit - limit / 3
+        val wildcards = sorted.drop(topCount).take(limit * 4)
+            .shuffled(Random(source.id.hashCode().toLong()))
+            .take(limit - topCount)
+        return sorted.take(topCount) + wildcards
+    }
 
     private fun norm(s: String) = s.trim().lowercase()
 

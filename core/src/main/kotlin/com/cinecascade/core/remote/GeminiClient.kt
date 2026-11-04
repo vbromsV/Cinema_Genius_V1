@@ -58,21 +58,35 @@ class GeminiClient(
         theme: ThemeVibe?,
         filters: DiscoveryFilters,
         knownTitles: List<String>,
-        count: Int = 8,
+        count: Int = 12,
     ): List<AiSuggestion> = withContext(Dispatchers.IO) {
         val body = requestAdapter.toJson(requestBody(buildPrompt(source, theme, filters, knownTitles, count)))
-        val request = Request.Builder()
-            .url("${baseUrl}models/$model:generateContent")
-            .header("x-goog-api-key", apiKey)
-            .post(body.toRequestBody("application/json".toMediaType()))
-            .build()
-        runCatching {
-            http.newCall(request).execute().use { response ->
-                if (!response.isSuccessful) return@use emptyList()
-                parseResponse(response.body?.string().orEmpty())
+        // Try the working model first, then the configured one, then known-good fallbacks.
+        val candidates = (listOfNotNull(workingModel) + model + FALLBACK_MODELS).distinct()
+        for (name in candidates) {
+            val request = Request.Builder()
+                .url("${baseUrl}models/$name:generateContent")
+                .header("x-goog-api-key", apiKey)
+                .post(body.toRequestBody("application/json".toMediaType()))
+                .build()
+            val outcome = runCatching {
+                http.newCall(request).execute().use { response ->
+                    when {
+                        response.isSuccessful -> parseResponse(response.body?.string().orEmpty())
+                        response.code == 404 || response.code == 400 -> null // unknown model: try the next
+                        else -> emptyList() // rate limit, bad key, server error: give up quietly
+                    }
+                }
+            }.getOrDefault(emptyList())
+            if (outcome != null) {
+                workingModel = name
+                return@withContext outcome
             }
-        }.getOrDefault(emptyList())
+        }
+        emptyList()
     }
+
+    @Volatile private var workingModel: String? = null
 
     internal fun parseResponse(raw: String): List<AiSuggestion> {
         val text = runCatching { responseAdapter.fromJson(raw) }.getOrNull()
@@ -100,7 +114,7 @@ class GeminiClient(
             appendLine("Only recommend: ${filters.mediaTypes.joinToString { if (it == MediaType.SERIES) "TV series" else "movies" }}.")
         }
         if (filters.genres.isNotEmpty()) appendLine("Each pick must include at least one of these genres: ${filters.genres.joinToString()}.")
-        appendLine("Recommend $count real, existing titles a fan would love next, mixing well-known picks with hidden gems.")
+        appendLine("Recommend $count real, existing titles a fan would love next. Mix well-known favourites with hidden gems, and vary decades, countries and tone so the user keeps discovering new corners.")
         if (knownTitles.isNotEmpty()) appendLine("Do not include: ${knownTitles.take(60).joinToString("; ")}.")
         appendLine("Use exact IMDb ids (tt followed by digits). type is \"movie\" or \"series\". Keep synopsis under 160 characters.")
     }
@@ -143,5 +157,6 @@ class GeminiClient(
 
     companion object {
         const val DEFAULT_MODEL = "gemini-3.5-flash"
+        private val FALLBACK_MODELS = listOf("gemini-2.5-flash", "gemini-2.0-flash")
     }
 }

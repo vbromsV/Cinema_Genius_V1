@@ -89,6 +89,7 @@ class MovieDiscoveryViewModel(private val repository: MovieRepository) : ViewMod
     }
 
     private fun afterTreeChange(tree: CascadeTree) {
+        tree.active.selectedItem?.let { repository.markSeen(it.id) }
         // OMDb: active row first, then the live preview.
         repository.enrich(tree.active.items + tree.preview?.items.orEmpty())
         scheduleAiExpansion(tree)

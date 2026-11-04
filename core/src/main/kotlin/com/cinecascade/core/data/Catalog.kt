@@ -54,6 +54,26 @@ object Catalog {
             "Big hearts, small adventures and endings that make you smile.",
             ColorProfile(0xFFB5523B, 0xFFE8B86D), listOf("Comedy", "Romance"),
         ),
+        ThemeVibe(
+            "heist", "Heists & Cons", "Slick & clever", "💎",
+            "Crews, plans and the con that nobody saw coming.",
+            ColorProfile(0xFF6B5A1E, 0xFFE0C04F), listOf("Crime", "Thriller"),
+        ),
+        ThemeVibe(
+            "horror", "Horror Night", "Lights off", "👻",
+            "Slow dread, sudden screams and things in the dark.",
+            ColorProfile(0xFF3B0D0D, 0xFFB71C1C), listOf("Horror", "Thriller"),
+        ),
+        ThemeVibe(
+            "animated", "Animated Wonders", "Colourful & heartfelt", "🎨",
+            "Hand-drawn dreams, pixel-perfect worlds and anime epics.",
+            ColorProfile(0xFF1E5E7B, 0xFFFF8A65), listOf("Animation", "Adventure"),
+        ),
+        ThemeVibe(
+            "true", "True Stories", "Based on reality", "📜",
+            "Real people, real events, more gripping than fiction.",
+            ColorProfile(0xFF3E3E4A, 0xFFB0A58C), listOf("Biography", "Drama"),
+        ),
     )
 
     val items: List<MediaItem> = buildList {
@@ -193,6 +213,208 @@ object Catalog {
             series("Ted Lasso", 2020, 8.8, "Bill Lawrence", "Jason Sudeikis, Hannah Waddingham, Brett Goldstein", "Comedy, Drama, Sport", "football coach optimism", "An American football coach takes over an English soccer team.")
             series("Schitt's Creek", 2015, 8.5, "Dan Levy", "Eugene Levy, Catherine O'Hara, Dan Levy", "Comedy", "family small town", "A wealthy family loses everything and moves to a tiny town.")
             series("Abbott Elementary", 2021, 8.2, "Quinta Brunson", "Quinta Brunson, Tyler James Williams, Janelle James", "Comedy", "school teachers mockumentary", "Dedicated teachers at an underfunded Philadelphia school.")
+        }
+        theme("space") {
+            movie("Star Wars: A New Hope", 1977, 8.6, "George Lucas", "Mark Hamill, Harrison Ford, Carrie Fisher, Alec Guinness", "Action, Adventure, Fantasy", "rebels empire force", "A farm boy joins a rebellion against a galactic empire.")
+            movie("Star Wars: The Empire Strikes Back", 1980, 8.7, "Irvin Kershner", "Mark Hamill, Harrison Ford, Carrie Fisher", "Action, Adventure, Fantasy", "rebels empire force", "The rebels are on the run as Darth Vader hunts Luke.")
+            movie("Star Trek", 2009, 7.9, "J.J. Abrams", "Chris Pine, Zachary Quinto, Zoe Saldana", "Action, Adventure, Sci-Fi", "starship crew federation", "A new crew of the Enterprise faces a vengeful Romulan.")
+            movie("Guardians of the Galaxy", 2014, 8.0, "James Gunn", "Chris Pratt, Zoe Saldana, Dave Bautista", "Action, Adventure, Comedy", "misfits galaxy heist", "A band of misfits fights to save the galaxy.")
+            movie("Prometheus", 2012, 7.0, "Ridley Scott", "Noomi Rapace, Michael Fassbender, Charlize Theron", "Adventure, Mystery, Sci-Fi", "origin creature expedition", "Scientists follow a star map to humanity's origins.")
+            movie("Event Horizon", 1997, 6.6, "Paul W.S. Anderson", "Laurence Fishburne, Sam Neill", "Horror, Sci-Fi, Mystery", "ship haunted rescue", "A rescue crew finds a ship that has returned from hell.")
+            movie("Gattaca", 1997, 7.7, "Andrew Niccol", "Ethan Hawke, Uma Thurman, Jude Law", "Drama, Sci-Fi, Thriller", "genetics future dream", "In a genetic caste society, an 'invalid' dreams of space.")
+            movie("Annihilation", 2018, 6.8, "Alex Garland", "Natalie Portman, Jennifer Jason Leigh, Tessa Thompson", "Adventure, Drama, Mystery", "shimmer expedition mutation", "A biologist enters a mysterious zone where nature is rewritten.")
+            movie("Edge of Tomorrow", 2014, 7.9, "Doug Liman", "Tom Cruise, Emily Blunt", "Action, Sci-Fi", "time loop aliens war", "A soldier relives the same day of an alien invasion.")
+            movie("District 9", 2009, 7.9, "Neill Blomkamp", "Sharlto Copley, David James", "Action, Sci-Fi, Thriller", "aliens slum apartheid", "Aliens stranded over Johannesburg live in a fenced-off slum.")
+            movie("Silent Running", 1972, 6.6, "Douglas Trumbull", "Bruce Dern", "Adventure, Drama, Sci-Fi", "forest ship robots", "A botanist protects the last forests of Earth in space.")
+            movie("Galaxy Quest", 1999, 7.3, "Dean Parisot", "Tim Allen, Sigourney Weaver, Alan Rickman", "Adventure, Comedy, Sci-Fi", "actors aliens parody", "Washed-up TV actors are recruited by real aliens.")
+            series("Star Trek: The Next Generation", 1987, 8.7, "Gene Roddenberry", "Patrick Stewart, Jonathan Frakes, Brent Spiner", "Action, Adventure, Sci-Fi", "starship crew federation", "Captain Picard and the Enterprise-D explore the galaxy.")
+            series("Battlestar Galactica", 2004, 8.7, "Ronald D. Moore", "Edward James Olmos, Mary McDonnell, Jamie Bamber", "Action, Drama, Sci-Fi", "fleet cylons survival", "The last human fleet flees the machines that destroyed their worlds.")
+            series("Foundation", 2021, 7.4, "David S. Goyer", "Jared Harris, Lee Pace, Lou Llobell", "Drama, Sci-Fi", "empire prophecy mathematics", "A mathematician predicts the fall of a galactic empire.")
+            series("Andor", 2022, 8.4, "Tony Gilroy", "Diego Luna, Stellan Skarsgård, Genevieve O'Reilly", "Action, Adventure, Drama", "rebellion spy empire", "A thief becomes a spy in the rebellion against the empire.")
+            series("The Mandalorian", 2019, 8.7, "Jon Favreau", "Pedro Pascal, Carl Weathers", "Action, Adventure, Sci-Fi", "bounty hunter child", "A lone bounty hunter protects a mysterious child.")
+        }
+        theme("nordic") {
+            movie("The Hunt", 2012, 8.3, "Thomas Vinterberg", "Mads Mikkelsen, Thomas Bo Larsen", "Drama, Thriller", "accusation village lie", "A teacher's life collapses after a false accusation.")
+            movie("Force Majeure", 2014, 7.2, "Ruben Östlund", "Johannes Kuhnke, Lisa Loven Kongsli", "Comedy, Drama", "avalanche family alps", "A family's holiday unravels after an avalanche scare.")
+            movie("Border", 2018, 7.0, "Ali Abbasi", "Eva Melander, Eero Milonoff", "Drama, Fantasy, Mystery", "customs troll sweden", "A customs officer who can smell guilt meets a mysterious traveller.")
+            movie("Another Round", 2020, 7.7, "Thomas Vinterberg", "Mads Mikkelsen, Thomas Bo Larsen", "Comedy, Drama", "alcohol teachers friendship", "Four teachers test a theory that a little alcohol improves life.")
+            movie("Midsommar", 2019, 7.1, "Ari Aster", "Florence Pugh, Jack Reynor, Will Poulter", "Drama, Horror, Mystery", "cult sweden festival", "A grieving woman joins a Swedish midsummer festival.")
+            series("Borgen", 2010, 8.4, "Adam Price", "Sidse Babett Knudsen, Birgitte Hjort Sørensen", "Drama", "politics denmark prime minister", "A woman rises to become Denmark's first female prime minister.")
+            series("Bordertown", 2016, 7.7, "Miikko Oikkonen", "Ville Virtanen, Matleena Kuusniemi", "Crime, Drama, Mystery", "detective finland", "A brilliant detective moves to a quiet Finnish border town.")
+            series("Jordskott", 2015, 7.5, "Henrik Björn", "Moa Gammel, Göran Ragnerstam", "Crime, Drama, Fantasy", "forest mystery sweden", "A woman returns home to investigate a missing child and a forest's secrets.")
+            series("Ragnarok", 2020, 7.0, "Adam Price", "David Stakston, Jonas Strand Gravli", "Action, Drama, Fantasy", "norse gods norway", "A teenager discovers he is the reincarnation of Thor.")
+            series("Occupied", 2015, 7.5, "Jo Nesbø", "Henrik Mestad, Eldar Skar", "Drama, Thriller", "russia norway oil", "Norway is quietly occupied by Russia after an energy crisis.")
+            series("The Rain", 2018, 6.3, "Jannik Tai Mosholt", "Alba August, Lucas Lynggaard Tønnesen", "Drama, Sci-Fi, Thriller", "virus denmark survival", "Siblings survive a virus carried in rain.")
+        }
+        theme("cyberpunk") {
+            movie("Tron: Legacy", 2010, 6.8, "Joseph Kosinski", "Garrett Hedlund, Jeff Bridges, Olivia Wilde", "Action, Adventure, Sci-Fi", "digital grid program", "A man enters the digital world his father created.")
+            movie("Total Recall", 1990, 7.5, "Paul Verhoeven", "Arnold Schwarzenegger, Sharon Stone", "Action, Adventure, Sci-Fi", "memory mars identity", "A worker's implanted memories hide a mission on Mars.")
+            movie("RoboCop", 1987, 7.6, "Paul Verhoeven", "Peter Weller, Nancy Allen", "Action, Crime, Sci-Fi", "cyborg detroit corporation", "A murdered cop is rebuilt as a cyborg.")
+            movie("Looper", 2012, 7.4, "Rian Johnson", "Joseph Gordon-Levitt, Bruce Willis, Emily Blunt", "Action, Drama, Sci-Fi", "time travel assassin", "A hitman must kill his own future self.")
+            movie("Elysium", 2013, 6.6, "Neill Blomkamp", "Matt Damon, Jodie Foster, Sharlto Copley", "Action, Drama, Sci-Fi", "class space station", "A worker fights to reach a paradise orbiting Earth.")
+            movie("Alita: Battle Angel", 2019, 7.3, "Robert Rodriguez", "Rosa Salazar, Christoph Waltz", "Action, Adventure, Sci-Fi", "cyborg warrior city", "A cyborg with no memory discovers her past in a scrapyard city.")
+            movie("Terminator 2: Judgment Day", 1991, 8.6, "James Cameron", "Arnold Schwarzenegger, Linda Hamilton, Edward Furlong", "Action, Sci-Fi", "terminator skynet future", "A reprogrammed Terminator protects the boy who will save humanity.")
+            movie("The Terminator", 1984, 8.1, "James Cameron", "Arnold Schwarzenegger, Michael Biehn, Linda Hamilton", "Action, Sci-Fi", "terminator skynet future", "A cyborg is sent back to kill the mother of the future leader.")
+            movie("The Matrix Reloaded", 2003, 7.2, "The Wachowskis", "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss", "Action, Sci-Fi", "simulation hacker reality", "Neo and the rebels race to save Zion.")
+            movie("Paprika", 2006, 7.7, "Satoshi Kon", "Megumi Hayashibara, Tōru Furuya", "Animation, Mystery, Sci-Fi", "dreams device therapy", "A therapist enters dreams as a device is stolen.")
+            series("Love, Death & Robots", 2019, 8.4, "Tim Miller", "Nolan North, Mackenzie Davis", "Animation, Action, Sci-Fi", "anthology robots", "An anthology of short animated sci-fi stories.")
+            series("Devs", 2020, 7.6, "Alex Garland", "Sonoya Mizuno, Nick Offerman", "Drama, Mystery, Sci-Fi", "quantum determinism tech", "A programmer investigates her boyfriend's death at a secretive tech company.")
+            series("Silo", 2023, 8.1, "Graham Yost", "Rebecca Ferguson, Tim Robbins", "Drama, Mystery, Sci-Fi", "bunker secrets dystopia", "Thousands live in an underground silo with strict rules.")
+        }
+        theme("whodunit") {
+            movie("Rear Window", 1954, 8.5, "Alfred Hitchcock", "James Stewart, Grace Kelly, Raymond Burr", "Mystery, Thriller", "neighbours voyeur murder", "A photographer confined to his apartment suspects a neighbour of murder.")
+            movie("Vertigo", 1958, 8.3, "Alfred Hitchcock", "James Stewart, Kim Novak", "Mystery, Romance, Thriller", "obsession detective", "A detective is hired to follow a woman and becomes obsessed.")
+            movie("Chinatown", 1974, 8.1, "Roman Polanski", "Jack Nicholson, Faye Dunaway", "Drama, Mystery, Thriller", "detective water noir", "A private eye uncovers corruption in 1930s Los Angeles.")
+            movie("L.A. Confidential", 1997, 7.8, "Curtis Hanson", "Kevin Spacey, Russell Crowe, Guy Pearce", "Crime, Drama, Mystery", "police corruption noir", "Three very different cops uncover conspiracy in 1950s LA.")
+            movie("The Maltese Falcon", 1941, 8.0, "John Huston", "Humphrey Bogart, Mary Astor", "Film-Noir, Mystery", "detective statue noir", "A private eye is caught in the hunt for a priceless statuette.")
+            movie("Mystic River", 2003, 7.9, "Clint Eastwood", "Sean Penn, Tim Robbins, Kevin Bacon", "Crime, Drama, Mystery", "murder friends boston", "A murder reunites three childhood friends.")
+            movie("Sherlock Holmes", 2009, 7.6, "Guy Ritchie", "Robert Downey Jr., Jude Law, Rachel McAdams", "Action, Adventure, Mystery", "detective sherlock london", "Holmes and Watson battle a secret society.")
+            movie("Identity", 2003, 7.3, "James Mangold", "John Cusack, Ray Liotta, Amanda Peet", "Mystery, Thriller, Horror", "motel storm killer", "Strangers stranded at a motel are killed one by one.")
+            series("Agatha Christie's Poirot", 1989, 8.2, "Clive Exton", "David Suchet, Hugh Fraser", "Crime, Drama, Mystery", "poirot detective belgian", "The fastidious Belgian detective solves murders.")
+            series("Line of Duty", 2012, 8.6, "Jed Mercurio", "Martin Compston, Vicky McClure, Adrian Dunbar", "Crime, Drama, Thriller", "police corruption anti-corruption", "An anti-corruption unit investigates dirty cops.")
+            series("The Sinner", 2017, 7.4, "Derek Simonds", "Bill Pullman, Jessica Biel", "Crime, Drama, Mystery", "detective motive past", "A detective digs into why ordinary people commit shocking crimes.")
+            series("Big Little Lies", 2017, 8.5, "David E. Kelley", "Reese Witherspoon, Nicole Kidman, Shailene Woodley", "Crime, Drama, Mystery", "murder mothers monterey", "Three mothers are entangled in a murder.")
+        }
+        theme("fantasy") {
+            movie("Harry Potter and the Sorcerer's Stone", 2001, 7.6, "Chris Columbus", "Daniel Radcliffe, Emma Watson, Rupert Grint", "Adventure, Family, Fantasy", "wizard school magic", "A boy learns he is a wizard and goes to Hogwarts.")
+            movie("Harry Potter and the Prisoner of Azkaban", 2004, 7.9, "Alfonso Cuarón", "Daniel Radcliffe, Emma Watson, Rupert Grint", "Adventure, Family, Fantasy", "wizard school magic", "Harry faces an escaped prisoner of Azkaban.")
+            movie("The Chronicles of Narnia: The Lion, the Witch and the Wardrobe", 2005, 6.9, "Andrew Adamson", "Georgie Henley, Tilda Swinton", "Adventure, Family, Fantasy", "wardrobe witch lion", "Four siblings enter a magical land through a wardrobe.")
+            movie("The NeverEnding Story", 1984, 7.4, "Wolfgang Petersen", "Barret Oliver, Noah Hathaway", "Adventure, Family, Fantasy", "book fantasia nothing", "A boy is drawn into the pages of a magical book.")
+            movie("Labyrinth", 1986, 7.3, "Jim Henson", "David Bowie, Jennifer Connelly", "Adventure, Family, Fantasy", "goblin king maze", "A girl must solve a maze to rescue her baby brother.")
+            movie("Excalibur", 1981, 7.2, "John Boorman", "Nigel Terry, Nicol Williamson, Helen Mirren", "Adventure, Drama, Fantasy", "arthur sword camelot", "The legend of King Arthur and his sword.")
+            movie("Conan the Barbarian", 1982, 6.9, "John Milius", "Arnold Schwarzenegger, James Earl Jones", "Action, Adventure, Fantasy", "barbarian revenge sorcery", "A barbarian avenges his parents' murder.")
+            series("His Dark Materials", 2019, 7.8, "Jack Thorne", "Dafne Keen, Ruth Wilson, James McAvoy", "Adventure, Drama, Fantasy", "parallel worlds daemon", "A girl searches for her kidnapped friend across parallel worlds.")
+            series("Shadow and Bone", 2021, 7.5, "Eric Heisserer", "Jessie Mei Li, Ben Barnes", "Action, Adventure, Fantasy", "grisha darkness fold", "A mapmaker discovers a power that could free her land from darkness.")
+            series("The Wheel of Time", 2021, 7.1, "Rafe Judkins", "Rosamund Pike, Daniel Henney", "Action, Adventure, Drama", "prophecy dragon reborn", "A sorceress searches for the Dragon Reborn.")
+            series("Merlin", 2008, 7.8, "Julian Jones", "Colin Morgan, Bradley James", "Adventure, Drama, Fantasy", "arthur camelot magic", "A young Merlin protects Prince Arthur in secret.")
+        }
+        theme("postapoc") {
+            movie("Mad Max 2: The Road Warrior", 1981, 7.6, "George Miller", "Mel Gibson, Bruce Spence", "Action, Adventure, Sci-Fi", "wasteland chase desert", "Max helps settlers defend their fuel against marauders.")
+            movie("Waterworld", 1995, 6.2, "Kevin Reynolds", "Kevin Costner, Jeanne Tripplehorn", "Action, Adventure, Sci-Fi", "ocean survival drifter", "A drifter protects a girl on a flooded Earth.")
+            movie("Zombieland", 2009, 7.6, "Ruben Fleischer", "Jesse Eisenberg, Woody Harrelson, Emma Stone", "Adventure, Comedy, Horror", "zombies road trip rules", "Survivors road-trip through a zombie-infested America.")
+            movie("Train to Busan", 2016, 7.6, "Yeon Sang-ho", "Gong Yoo, Ma Dong-seok", "Action, Horror, Thriller", "zombies train korea", "Passengers fight to survive a zombie outbreak on a train.")
+            movie("Bird Box", 2018, 6.6, "Susanne Bier", "Sandra Bullock, Trevante Rhodes", "Drama, Horror, Sci-Fi", "blindfold creatures family", "A mother guides her children blindfolded through a hostile world.")
+            movie("Planet of the Apes", 1968, 7.9, "Franklin J. Schaffner", "Charlton Heston, Roddy McDowall", "Action, Adventure, Sci-Fi", "apes twist astronaut", "Astronauts crash on a planet ruled by apes.")
+            movie("The Day After Tomorrow", 2004, 6.4, "Roland Emmerich", "Dennis Quaid, Jake Gyllenhaal", "Action, Adventure, Sci-Fi", "climate ice storm", "A sudden ice age engulfs the northern hemisphere.")
+            series("The Walking Dead", 2010, 8.1, "Frank Darabont", "Andrew Lincoln, Norman Reedus", "Drama, Horror, Thriller", "zombies survival group", "Survivors try to live in a zombie apocalypse.")
+            series("Sweet Tooth", 2021, 7.8, "Jim Mickle", "Christian Convery, Nonso Anozie", "Adventure, Drama, Fantasy", "hybrid boy journey", "A hybrid boy journeys across a world after a pandemic.")
+            series("The 100", 2014, 7.6, "Jason Rothenberg", "Eliza Taylor, Bob Morley", "Drama, Mystery, Sci-Fi", "teenagers earth return", "Teenagers return to a radioactive Earth.")
+            series("Years and Years", 2019, 8.0, "Russell T Davies", "Emma Thompson, Rory Kinnear", "Drama, Sci-Fi", "family future politics", "A family faces the near future as the world unravels.")
+        }
+        theme("psych") {
+            movie("Requiem for a Dream", 2000, 8.3, "Darren Aronofsky", "Ellen Burstyn, Jared Leto, Jennifer Connelly", "Drama", "addiction spiral", "Four people's addictions destroy their dreams.")
+            movie("Mulholland Drive", 2001, 7.9, "David Lynch", "Naomi Watts, Laura Harring", "Drama, Mystery, Thriller", "hollywood dream identity", "An actress helps an amnesiac woman in Hollywood.")
+            movie("The Silence of the Lambs", 1991, 8.6, "Jonathan Demme", "Jodie Foster, Anthony Hopkins", "Crime, Drama, Thriller", "killer fbi cannibal", "A young FBI trainee consults a cannibal to catch another killer.")
+            movie("Donnie Darko", 2001, 8.0, "Richard Kelly", "Jake Gyllenhaal, Jena Malone", "Drama, Sci-Fi, Thriller", "rabbit time apocalypse", "A troubled teenager is guided by a mysterious rabbit.")
+            movie("Eternal Sunshine of the Spotless Mind", 2004, 8.3, "Michel Gondry", "Jim Carrey, Kate Winslet", "Drama, Romance, Sci-Fi", "memory erase love", "A couple erases each other from their memories.")
+            movie("Joker", 2019, 8.4, "Todd Phillips", "Joaquin Phoenix, Robert De Niro", "Crime, Drama, Thriller", "clown madness gotham", "A failed comedian descends into madness.")
+            movie("Split", 2016, 7.3, "M. Night Shyamalan", "James McAvoy, Anya Taylor-Joy", "Horror, Thriller", "identities kidnapping", "A man with 23 personalities kidnaps three girls.")
+            movie("The Sixth Sense", 1999, 8.2, "M. Night Shyamalan", "Bruce Willis, Haley Joel Osment", "Drama, Mystery, Thriller", "ghosts child twist", "A boy who sees dead people is helped by a child psychologist.")
+            movie("Whiplash", 2014, 8.5, "Damien Chazelle", "Miles Teller, J.K. Simmons", "Drama, Music", "drummer obsession teacher", "A young drummer is pushed to the brink by his teacher.")
+            movie("Mother!", 2017, 6.6, "Darren Aronofsky", "Jennifer Lawrence, Javier Bardem", "Drama, Horror, Mystery", "house guests allegory", "A couple's home is invaded by uninvited guests.")
+            series("Dark", 2017, 8.7, "Baran bo Odar", "Louis Hofmann, Lisa Vicari", "Crime, Drama, Mystery", "time travel germany family", "A child's disappearance exposes a time-travelling web.")
+            series("Hannibal", 2013, 8.5, "Bryan Fuller", "Hugh Dancy, Mads Mikkelsen", "Crime, Drama, Horror", "cannibal profiler", "A profiler is drawn into a dance with Hannibal Lecter.")
+            series("You", 2018, 7.7, "Greg Berlanti", "Penn Badgley, Elizabeth Lail", "Crime, Drama, Romance", "stalker obsession", "A charming bookstore manager becomes obsessed.")
+            series("Twin Peaks", 1990, 8.8, "Mark Frost", "Kyle MacLachlan, Sheryl Lee", "Crime, Drama, Mystery", "fbi town dream", "An FBI agent investigates a homecoming queen's murder.")
+        }
+        theme("cozy") {
+            movie("Notting Hill", 1999, 7.2, "Roger Michell", "Julia Roberts, Hugh Grant", "Comedy, Drama, Romance", "bookshop movie star london", "A bookseller falls for a famous actress.")
+            movie("Love Actually", 2003, 7.6, "Richard Curtis", "Hugh Grant, Colin Firth, Emma Thompson", "Comedy, Drama, Romance", "christmas love london", "Interwoven love stories in the weeks before Christmas.")
+            movie("The Princess Bride", 1987, 8.0, "Rob Reiner", "Cary Elwes, Robin Wright, Mandy Patinkin", "Adventure, Family, Fantasy", "swordfight true love", "A farmhand rescues his true love from a prince.")
+            movie("Back to the Future", 1985, 8.5, "Robert Zemeckis", "Michael J. Fox, Christopher Lloyd", "Adventure, Comedy, Sci-Fi", "time travel delorean", "A teenager is sent back to 1955 in a time-travelling car.")
+            movie("The Holiday", 2006, 6.9, "Nancy Meyers", "Cameron Diaz, Kate Winslet, Jude Law", "Comedy, Romance", "house swap christmas", "Two women swap homes for the holidays.")
+            movie("Crazy Rich Asians", 2018, 6.9, "Jon M. Chu", "Constance Wu, Henry Golding", "Comedy, Drama, Romance", "wedding singapore family", "A woman meets her boyfriend's ultra-wealthy family.")
+            movie("Forrest Gump", 1994, 8.8, "Robert Zemeckis", "Tom Hanks, Robin Wright, Gary Sinise", "Drama, Romance", "history simple life", "A kind man drifts through decades of American history.")
+            series("Parks and Recreation", 2009, 8.6, "Greg Daniels", "Amy Poehler, Nick Offerman, Aziz Ansari", "Comedy", "town government mockumentary", "A deputy director tries to improve her small town.")
+            series("Friends", 1994, 8.9, "David Crane", "Jennifer Aniston, Courteney Cox, Matt LeBlanc", "Comedy, Romance", "friends new-york apartment", "Six friends navigate life and love in Manhattan.")
+            series("The Office", 2005, 9.0, "Greg Daniels", "Steve Carell, Rainn Wilson, John Krasinski", "Comedy", "workplace mockumentary", "A mockumentary about the staff of a paper company.")
+            series("Brooklyn Nine-Nine", 2013, 8.4, "Dan Goor", "Andy Samberg, Andre Braugher", "Comedy, Crime", "police precinct", "Detectives of a Brooklyn precinct joke their way through cases.")
+            series("Fleabag", 2016, 8.7, "Phoebe Waller-Bridge", "Phoebe Waller-Bridge, Sian Clifford", "Comedy, Drama", "london family grief", "A sharp-tongued woman navigates life and loss in London.")
+            series("Derry Girls", 2018, 8.4, "Lisa McGee", "Saoirse-Monica Jackson, Nicola Coughlan", "Comedy", "teenagers northern-ireland", "Teenage friends in 1990s Northern Ireland.")
+        }
+        theme("heist") {
+            movie("Ocean's Eleven", 2001, 7.7, "Steven Soderbergh", "George Clooney, Brad Pitt, Julia Roberts, Matt Damon", "Crime, Thriller", "casino vault crew", "A crew plans to rob three Las Vegas casinos at once.")
+            movie("Heat", 1995, 8.3, "Michael Mann", "Al Pacino, Robert De Niro, Val Kilmer", "Action, Crime, Drama", "robbery detective los-angeles", "A detective and a master thief clash in Los Angeles.")
+            movie("The Italian Job", 2003, 7.0, "F. Gary Gray", "Mark Wahlberg, Charlize Theron, Edward Norton", "Action, Crime, Thriller", "gold mini revenge", "A crew plots revenge on a former partner who stole gold.")
+            movie("Inside Man", 2006, 7.6, "Spike Lee", "Denzel Washington, Clive Owen, Jodie Foster", "Crime, Drama, Mystery", "hostage bank negotiator", "A detective negotiates with bank robbers who have a hidden plan.")
+            movie("Baby Driver", 2017, 7.5, "Edgar Wright", "Ansel Elgort, Kevin Spacey, Lily James", "Action, Crime, Drama", "getaway driver music", "A music-loving getaway driver wants out.")
+            movie("The Town", 2010, 7.5, "Ben Affleck", "Ben Affleck, Rebecca Hall, Jeremy Renner", "Crime, Drama, Thriller", "bank robbers boston", "A bank robber falls for a hostage.")
+            movie("Logan Lucky", 2017, 7.0, "Steven Soderbergh", "Channing Tatum, Adam Driver, Daniel Craig", "Comedy, Crime, Drama", "speedway robbery family", "Two brothers plan a heist at a NASCAR race.")
+            movie("Snatch", 2000, 8.3, "Guy Ritchie", "Jason Statham, Brad Pitt, Benicio Del Toro", "Comedy, Crime", "diamond boxing london", "A stolen diamond and an illegal boxing match collide.")
+            movie("Lock, Stock and Two Smoking Barrels", 1998, 8.1, "Guy Ritchie", "Jason Statham, Jason Flemyng", "Comedy, Crime", "gang debt london", "Four friends owe a fortune after a rigged card game.")
+            movie("The Usual Suspects", 1995, 8.5, "Bryan Singer", "Kevin Spacey, Gabriel Byrne, Benicio Del Toro", "Crime, Drama, Mystery", "lineup keyser soze", "A survivor tells of the criminals behind a massacre.")
+            movie("Catch Me If You Can", 2002, 8.1, "Steven Spielberg", "Leonardo DiCaprio, Tom Hanks", "Biography, Crime, Drama", "con forger fbi", "A teen con man is chased by an FBI agent.")
+            movie("The Sting", 1973, 8.3, "George Roy Hill", "Paul Newman, Robert Redford", "Comedy, Crime, Drama", "con mob 1930s", "Two grifters set up an elaborate con on a crime boss.")
+            movie("Now You See Me", 2013, 7.2, "Louis Leterrier", "Jesse Eisenberg, Mark Ruffalo, Woody Harrelson", "Crime, Mystery, Thriller", "magicians robbery fbi", "Magicians rob banks during their shows.")
+            series("Money Heist", 2017, 8.2, "Álex Pina", "Úrsula Corberó, Álvaro Morte", "Action, Crime, Mystery", "professor mint masks", "A mastermind leads a crew in an assault on the Royal Mint.")
+            series("Peaky Blinders", 2013, 8.7, "Steven Knight", "Cillian Murphy, Paul Anderson, Helen McCrory", "Crime, Drama", "gang birmingham 1920s", "A gangster family rises in post-war Birmingham.")
+            series("Lupin", 2021, 7.5, "George Kay", "Omar Sy, Ludivine Sagnier", "Action, Crime, Drama", "thief paris gentleman", "A gentleman thief takes revenge on a wealthy family.")
+            series("Breaking Bad", 2008, 9.5, "Vince Gilligan", "Bryan Cranston, Aaron Paul, Anna Gunn", "Crime, Drama, Thriller", "chemistry teacher drugs", "A chemistry teacher turns to making meth.")
+            series("Better Call Saul", 2015, 8.9, "Vince Gilligan", "Bob Odenkirk, Rhea Seehorn", "Crime, Drama", "lawyer new-mexico", "The rise of a small-time lawyer.")
+        }
+        theme("horror") {
+            movie("Hereditary", 2018, 7.3, "Ari Aster", "Toni Collette, Alex Wolff, Milly Shapiro", "Drama, Horror, Mystery", "family grief cult", "A family unravels after their matriarch dies.")
+            movie("The Shining", 1980, 8.4, "Stanley Kubrick", "Jack Nicholson, Shelley Duvall", "Drama, Horror", "hotel winter madness", "A writer and his family are isolated in a haunted hotel.")
+            movie("Get Out", 2017, 7.8, "Jordan Peele", "Daniel Kaluuya, Allison Williams", "Horror, Mystery, Thriller", "family weekend hypnosis", "A man visits his girlfriend's family with sinister secrets.")
+            movie("The Conjuring", 2013, 7.5, "James Wan", "Vera Farmiga, Patrick Wilson, Lili Taylor", "Horror, Mystery, Thriller", "haunted house demonologists", "Paranormal investigators help a family terrorised by a presence.")
+            movie("It Follows", 2014, 6.8, "David Robert Mitchell", "Maika Monroe, Keir Gilchrist", "Horror, Mystery", "curse followed", "A young woman is pursued by a relentless entity.")
+            movie("The Witch", 2015, 6.9, "Robert Eggers", "Anya Taylor-Joy, Ralph Ineson", "Drama, Fantasy, Horror", "puritan family forest", "A 1630s family is haunted by a witch in the woods.")
+            movie("The Exorcist", 1973, 8.1, "William Friedkin", "Ellen Burstyn, Linda Blair", "Horror", "possession priest", "Two priests try to save a possessed girl.")
+            movie("Halloween", 1978, 7.7, "John Carpenter", "Jamie Lee Curtis, Donald Pleasence", "Horror, Thriller", "slasher babysitter", "A killer stalks babysitters on Halloween night.")
+            movie("The Thing", 1982, 8.2, "John Carpenter", "Kurt Russell, Wilford Brimley", "Horror, Mystery, Sci-Fi", "antarctica shapeshifter paranoia", "Researchers in Antarctica face a shapeshifting alien.")
+            movie("A Nightmare on Elm Street", 1984, 7.4, "Wes Craven", "Heather Langenkamp, Robert Englund", "Horror", "dreams killer teenagers", "A killer attacks teens in their dreams.")
+            movie("Scream", 1996, 7.4, "Wes Craven", "Neve Campbell, Courteney Cox, David Arquette", "Horror, Mystery", "slasher ghostface", "A masked killer targets a small town.")
+            movie("Us", 2019, 6.8, "Jordan Peele", "Lupita Nyong'o, Winston Duke", "Horror, Mystery, Thriller", "doppelgangers family", "A family is attacked by their doubles.")
+            movie("Talk to Me", 2022, 7.1, "Danny Philippou", "Sophie Wilde, Alexandra Jensen", "Horror, Thriller", "hand possession teenagers", "Teens use an embalmed hand to talk to the dead.")
+            movie("Barbarian", 2022, 7.0, "Zach Cregger", "Georgina Campbell, Bill Skarsgård", "Horror, Mystery, Thriller", "rental house basement", "A double-booked rental holds a terrible secret.")
+            movie("The Babadook", 2014, 6.8, "Jennifer Kent", "Essie Davis, Noah Wiseman", "Drama, Horror", "monster grief mother", "A widow and son are haunted by a children's book monster.")
+            series("The Haunting of Hill House", 2018, 8.6, "Mike Flanagan", "Michiel Huisman, Carla Gugino", "Drama, Horror, Mystery", "haunted house family", "Siblings confront the house that haunted their childhood.")
+            series("Stranger Things", 2016, 8.7, "The Duffer Brothers", "Millie Bobby Brown, Finn Wolfhard, Winona Ryder", "Drama, Fantasy, Horror", "upside-down kids 1980s", "Kids face supernatural forces in a small town.")
+            series("Midnight Mass", 2021, 7.7, "Mike Flanagan", "Hamish Linklater, Kate Siegel", "Drama, Horror, Mystery", "island priest faith", "A charismatic priest arrives on an isolated island.")
+        }
+        theme("animated") {
+            movie("Spider-Man: Into the Spider-Verse", 2018, 8.4, "Bob Persichetti", "Shameik Moore, Jake Johnson, Hailee Steinfeld", "Animation, Action, Adventure", "multiverse teenager hero", "Miles Morales meets other Spider-People.")
+            movie("Coco", 2017, 8.4, "Lee Unkrich", "Anthony Gonzalez, Gael García Bernal", "Animation, Adventure, Family", "music dead mexico", "A boy enters the Land of the Dead to find his family's secret.")
+            movie("Inside Out", 2015, 8.1, "Pete Docter", "Amy Poehler, Phyllis Smith", "Animation, Adventure, Comedy", "emotions mind girl", "A girl's emotions guide her through a big move.")
+            movie("Up", 2009, 8.3, "Pete Docter", "Ed Asner, Jordan Nagai", "Animation, Adventure, Comedy", "balloons house adventure", "An old man flies his house to South America.")
+            movie("Toy Story", 1995, 8.3, "John Lasseter", "Tom Hanks, Tim Allen", "Animation, Adventure, Comedy", "toys friendship", "A cowboy doll feels threatened by a new space ranger.")
+            movie("Your Name", 2016, 8.4, "Makoto Shinkai", "Ryunosuke Kamiki, Mone Kamishiraishi", "Animation, Drama, Fantasy", "body swap comet", "Two teenagers swap bodies across distance and time.")
+            movie("Howl's Moving Castle", 2004, 8.2, "Hayao Miyazaki", "Chieko Baisho, Takuya Kimura", "Animation, Adventure, Family", "castle witch war", "A girl cursed by a witch seeks help from a wizard.")
+            movie("The Lion King", 1994, 8.5, "Roger Allers", "Matthew Broderick, Jeremy Irons, James Earl Jones", "Animation, Adventure, Drama", "lion pride revenge", "A lion prince flees his kingdom after his father's death.")
+            movie("Shrek", 2001, 7.9, "Andrew Adamson", "Mike Myers, Eddie Murphy, Cameron Diaz", "Animation, Adventure, Comedy", "ogre fairy-tale", "An ogre rescues a princess to get his swamp back.")
+            movie("How to Train Your Dragon", 2010, 8.1, "Dean DeBlois", "Jay Baruchel, Gerard Butler", "Animation, Action, Adventure", "viking dragon friendship", "A young Viking befriends a dragon.")
+            movie("Finding Nemo", 2003, 8.2, "Andrew Stanton", "Albert Brooks, Ellen DeGeneres", "Animation, Adventure, Comedy", "ocean father fish", "A clownfish crosses the ocean to find his son.")
+            movie("Ratatouille", 2007, 8.1, "Brad Bird", "Patton Oswalt, Lou Romano", "Animation, Adventure, Comedy", "rat chef paris", "A rat dreams of becoming a chef in Paris.")
+            movie("The Incredibles", 2004, 8.0, "Brad Bird", "Craig T. Nelson, Holly Hunter", "Animation, Action, Adventure", "superheroes family", "A family of superheroes must save the world.")
+            movie("Soul", 2020, 8.0, "Pete Docter", "Jamie Foxx, Tina Fey", "Animation, Adventure, Comedy", "jazz afterlife purpose", "A jazz musician's soul is separated from his body.")
+            movie("Grave of the Fireflies", 1988, 8.5, "Isao Takahata", "Tsutomu Tatsumi, Ayano Shiraishi", "Animation, Drama, War", "war siblings japan", "Two siblings struggle to survive in wartime Japan.")
+            series("Arcane", 2021, 9.0, "Christian Linke", "Hailee Steinfeld, Kevin Alejandro", "Animation, Action, Adventure", "sisters city war", "Two sisters are caught in a conflict between two cities.")
+            series("Avatar: The Last Airbender", 2005, 9.3, "Michael Dante DiMartino", "Zach Tyler Eisen, Mae Whitman", "Animation, Action, Adventure", "bending avatar war", "A young airbender must master the elements.")
+            series("Rick and Morty", 2013, 9.1, "Justin Roiland", "Justin Roiland, Chris Parnell", "Animation, Adventure, Comedy", "scientist multiverse grandson", "A mad scientist drags his grandson through the multiverse.")
+            series("BoJack Horseman", 2014, 8.8, "Raphael Bob-Waksberg", "Will Arnett, Amy Sedaris", "Animation, Comedy, Drama", "actor hollywood depression", "A washed-up sitcom star, a horse, tries to find meaning.")
+            series("Attack on Titan", 2013, 9.1, "Hajime Isayama", "Yuki Kaji, Yui Ishikawa", "Animation, Action, Adventure", "giants walls survival", "Humanity fights giant man-eating Titans.")
+            series("Death Note", 2006, 8.9, "Tetsurō Araki", "Mamoru Miyano, Kappei Yamaguchi", "Animation, Crime, Drama", "notebook detective kira", "A student finds a notebook that kills.")
+        }
+        theme("true") {
+            movie("Oppenheimer", 2023, 8.3, "Christopher Nolan", "Cillian Murphy, Emily Blunt, Robert Downey Jr.", "Biography, Drama, History", "atomic bomb physicist", "The story of the father of the atomic bomb.")
+            movie("The Social Network", 2010, 7.8, "David Fincher", "Jesse Eisenberg, Andrew Garfield, Justin Timberlake", "Biography, Drama", "facebook startup lawsuit", "The founding of Facebook and the lawsuits that followed.")
+            movie("Spotlight", 2015, 8.1, "Tom McCarthy", "Mark Ruffalo, Michael Keaton, Rachel McAdams", "Biography, Crime, Drama", "journalists church investigation", "Reporters uncover abuse in the Catholic church.")
+            movie("Argo", 2012, 7.7, "Ben Affleck", "Ben Affleck, Bryan Cranston, Alan Arkin", "Biography, Drama, Thriller", "hostage iran movie", "A CIA agent fakes a film to rescue hostages.")
+            movie("12 Years a Slave", 2013, 8.1, "Steve McQueen", "Chiwetel Ejiofor, Michael Fassbender", "Biography, Drama, History", "slavery freedom", "A free man is kidnapped and sold into slavery.")
+            movie("The Wolf of Wall Street", 2013, 8.2, "Martin Scorsese", "Leonardo DiCaprio, Jonah Hill, Margot Robbie", "Biography, Comedy, Crime", "stockbroker fraud excess", "The rise and fall of a stockbroker.")
+            movie("Bohemian Rhapsody", 2018, 7.9, "Bryan Singer", "Rami Malek, Lucy Boynton", "Biography, Drama, Music", "queen band freddie", "The story of Freddie Mercury and Queen.")
+            movie("Schindler's List", 1993, 9.0, "Steven Spielberg", "Liam Neeson, Ben Kingsley, Ralph Fiennes", "Biography, Drama, History", "holocaust factory", "A businessman saves over a thousand Jews.")
+            movie("The King's Speech", 2010, 8.0, "Tom Hooper", "Colin Firth, Geoffrey Rush, Helena Bonham Carter", "Biography, Drama, History", "stammer king therapist", "A king overcomes his stammer with an unorthodox therapist.")
+            movie("Moneyball", 2011, 7.6, "Bennett Miller", "Brad Pitt, Jonah Hill", "Biography, Drama, Sport", "baseball statistics", "A manager builds a team with statistics.")
+            movie("Hidden Figures", 2016, 7.8, "Theodore Melfi", "Taraji P. Henson, Octavia Spencer, Janelle Monáe", "Biography, Drama, History", "nasa mathematicians", "Three Black mathematicians help launch John Glenn.")
+            movie("Dunkirk", 2017, 7.8, "Christopher Nolan", "Fionn Whitehead, Tom Hardy, Cillian Murphy", "Action, Drama, History", "evacuation war beach", "Allied soldiers are evacuated from Dunkirk.")
+            movie("1917", 2019, 8.2, "Sam Mendes", "George MacKay, Dean-Charles Chapman", "Drama, War", "trench messenger war", "Two soldiers cross enemy territory to deliver a message.")
+            movie("Saving Private Ryan", 1998, 8.6, "Steven Spielberg", "Tom Hanks, Matt Damon, Tom Sizemore", "Drama, War", "d-day rescue war", "Soldiers search for a paratrooper behind enemy lines.")
+            series("Chernobyl", 2019, 9.3, "Craig Mazin", "Jared Harris, Stellan Skarsgård, Emily Watson", "Drama, History, Thriller", "nuclear disaster soviet", "The 1986 nuclear disaster and the cover-up.")
+            series("The Crown", 2016, 8.6, "Peter Morgan", "Claire Foy, Olivia Colman, Imelda Staunton", "Biography, Drama, History", "queen monarchy britain", "The reign of Queen Elizabeth II.")
+            series("Band of Brothers", 2001, 9.4, "Tom Hanks", "Damian Lewis, Ron Livingston", "Drama, History, War", "paratroopers company war", "The story of Easy Company in WWII.")
+            series("The Queen's Gambit", 2020, 8.5, "Scott Frank", "Anya Taylor-Joy, Bill Camp", "Drama", "chess prodigy addiction", "An orphan becomes a chess prodigy.")
+            series("Narcos", 2015, 8.8, "Chris Brancato", "Wagner Moura, Pedro Pascal", "Biography, Crime, Drama", "escobar cartel colombia", "The rise and fall of Pablo Escobar.")
         }
     }
 
