@@ -65,11 +65,17 @@ interface NodeFactory {
 
 class RepositoryNodeFactory(
     private val repository: MovieRepository,
+    /** Shuffles the unfiltered vibe row once per session; null keeps catalog order. */
+    private val themeShuffleSeed: Long? = null,
     private val filters: () -> DiscoveryFilters,
 ) : NodeFactory {
     private val ids = AtomicLong(0)
 
-    override fun themeRow() = CarouselNode(id = ids.incrementAndGet(), isThemeRow = true, themes = repository.themes)
+    override fun themeRow() = CarouselNode(
+        id = ids.incrementAndGet(),
+        isThemeRow = true,
+        themes = repository.themesFor(filters(), themeShuffleSeed),
+    )
 
     override fun childOf(parent: CarouselNode, pathIds: Set<String>): CarouselNode? {
         parent.selectedTheme?.let { theme ->
@@ -145,7 +151,14 @@ class CascadeNavigator(private val factory: NodeFactory) {
      * when they survive the new filters, and the active depth when possible.
      */
     fun rebuild(tree: CascadeTree): CascadeTree {
-        val rebuilt = mutableListOf(tree.levels.first())
+        // The vibe row follows the filters too; keep the focused vibe if it is still offered.
+        val oldRoot = tree.levels.first()
+        val freshRoot = factory.themeRow()
+        val root = when {
+            freshRoot.keys() == oldRoot.keys() -> oldRoot
+            else -> freshRoot.copy(selectedIndex = freshRoot.indexOfKey(oldRoot.selectedKey).coerceAtLeast(0))
+        }
+        val rebuilt = mutableListOf(root)
         for (i in 1..tree.activeLevelIndex + 1) {
             val parent = rebuilt[i - 1]
             val fresh = factory.childOf(parent, rebuiltPath(rebuilt)) ?: break

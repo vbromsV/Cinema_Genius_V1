@@ -2,6 +2,7 @@ package com.cinecascade.core.repository
 
 import com.cinecascade.core.data.Catalog
 import com.cinecascade.core.data.ColorMath
+import com.cinecascade.core.data.GenreVibes
 import com.cinecascade.core.engine.RecommendationEngine
 import com.cinecascade.core.engine.ScoreBreakdown
 import com.cinecascade.core.model.DiscoveryFilters
@@ -23,6 +24,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import java.util.concurrent.ConcurrentHashMap
+import kotlin.random.Random
 
 /**
  * Single source of truth for titles. Holds the curated catalog, merges OMDb metadata in the
@@ -79,10 +81,50 @@ class MovieRepository(
             .entries.sortedWith(compareByDescending<Map.Entry<String, Int>> { it.value }.thenBy { it.key })
             .map { it.key }
 
-    /** Level 1 shelf for a theme. Falls back progressively so filters can never empty a row. */
+    /**
+     * The Level 0 vibe row for the current filters. Vibes whose identity genres are all filtered
+     * out disappear; a vibe is only offered if enough titles survive the filters; selected genres
+     * that no vibe covers get a generated "<genre>" vibe. Without filters the order can be shuffled
+     * per session ([shuffleSeed]) so the row feels different each time.
+     */
+    fun themesFor(filters: DiscoveryFilters, shuffleSeed: Long? = null): List<ThemeVibe> {
+        val all = _catalog.value.values
+        fun matching(theme: ThemeVibe) = all.count { theme.contains(it) && filters.matches(it) }
+
+        if (!filters.isActive) {
+            val usable = themes.filter { matching(it) >= MIN_VIBE_TITLES }
+            return shuffleSeed?.let { usable.shuffled(Random(it)) } ?: usable
+        }
+
+        val eligible = themes.filter { theme ->
+            val genreOk = filters.genres.isEmpty() || theme.seedGenres.isEmpty() || theme.seedGenres.any { it in filters.genres }
+            val typeOk = filters.mediaTypes.isEmpty() || theme.rule?.mediaType == null || theme.rule.mediaType in filters.mediaTypes
+            genreOk && typeOk && matching(theme) >= MIN_VIBE_TITLES
+        }
+        val uncovered = filters.genres.filter { g -> eligible.none { g in it.seedGenres } }
+            .sorted()
+            .map(GenreVibes::forGenre)
+            .filter { matching(it) > 0 }
+        val ranked = (eligible + uncovered).sortedWith(
+            compareByDescending<ThemeVibe> { t -> t.seedGenres.count { it in filters.genres } }
+                .thenByDescending { matching(it) },
+        )
+        return ranked.ifEmpty { themes.filter { matching(it) > 0 }.ifEmpty { themes } }
+    }
+
+    /** Level 1 shelf for a vibe. Falls back progressively so filters can never empty a row. */
     fun titlesForTheme(theme: ThemeVibe, filters: DiscoveryFilters, limit: Int = 20): List<MediaItem> {
         val all = _catalog.value.values
         val byRating = compareByDescending<MediaItem> { it.rating }.thenBy { it.title }
+        if (theme.rule != null) {
+            val members = all.filter { theme.contains(it) && filters.matches(it) }.sortedWith(byRating)
+            if (members.isNotEmpty()) {
+                // Best-rated first, then a seeded handful from further down for variety.
+                val top = limit - limit / 3
+                val wild = members.drop(top).shuffled(Random(theme.id.hashCode().toLong())).take(limit - top)
+                return members.take(top) + wild
+            }
+        }
         val own = all.filter { it.themeId == theme.id && it.source == ItemSource.CURATED && filters.matches(it) }
         if (own.size >= 4) return own.sortedWith(byRating).take(limit)
         val related = all.filter { it.themeId != theme.id && filters.matches(it) && it.genres.any { g -> g in theme.seedGenres } }
@@ -195,4 +237,8 @@ class MovieRepository(
         return matchedIds.size
     }
 
+
+    private companion object {
+        const val MIN_VIBE_TITLES = 3
+    }
 }

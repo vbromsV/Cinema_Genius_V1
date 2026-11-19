@@ -20,7 +20,10 @@ import kotlinx.coroutines.launch
 class MovieDiscoveryViewModel(private val repository: MovieRepository) : ViewModel(), DiscoveryActions {
 
     private var filters = DiscoveryFilters()
-    private val navigator = CascadeNavigator(RepositoryNodeFactory(repository) { filters })
+    // Vibe row order is shuffled once per app session for variety.
+    private val navigator = CascadeNavigator(
+        RepositoryNodeFactory(repository, filters = { filters }, themeShuffleSeed = System.currentTimeMillis()),
+    )
 
     private val _uiState = MutableStateFlow(
         DiscoveryUiState(

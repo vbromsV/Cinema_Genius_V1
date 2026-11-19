@@ -3,6 +3,7 @@ package com.cinecascade.core.data
 import com.cinecascade.core.model.ColorProfile
 import com.cinecascade.core.model.MediaItem
 import com.cinecascade.core.model.MediaType
+import com.cinecascade.core.model.ThemeRule
 import com.cinecascade.core.model.ThemeVibe
 
 /**
@@ -73,6 +74,80 @@ object Catalog {
             "true", "True Stories", "Based on reality", "📜",
             "Real people, real events, more gripping than fiction.",
             ColorProfile(0xFF3E3E4A, 0xFFB0A58C), listOf("Biography", "Drama"),
+        ),
+        // ---- Rule-based vibes: they gather titles from the whole catalog ----
+        ThemeVibe(
+            "romance", "Love & Heartbreak", "Swoon-worthy", "💘",
+            "Meet-cutes, grand gestures and loves that got away.",
+            ColorProfile(0xFF7A1E3A, 0xFFFF7EA8), listOf("Romance"), ThemeRule(genres = listOf("Romance")),
+        ),
+        ThemeVibe(
+            "action", "Adrenaline Rush", "Full throttle", "💥",
+            "Chases, fights and set pieces that never let up.",
+            ColorProfile(0xFF7A2A0E, 0xFFFF6D00), listOf("Action"), ThemeRule(genres = listOf("Action")),
+        ),
+        ThemeVibe(
+            "laugh", "Laugh Out Loud", "Pure fun", "😂",
+            "Comedies to share with friends on the sofa.",
+            ColorProfile(0xFF6B5A00, 0xFFFFD54F), listOf("Comedy"), ThemeRule(genres = listOf("Comedy")),
+        ),
+        ThemeVibe(
+            "mindbend", "Mind-Bending", "Twist your brain", "🌀",
+            "Time loops, false memories, dreams within dreams.",
+            ColorProfile(0xFF1E1E6B, 0xFF26C6DA), listOf("Sci-Fi", "Mystery", "Thriller"),
+            ThemeRule(keywords = listOf("time", "loop", "memory", "dreams", "simulation", "identity", "reality", "double", "multiverse", "consciousness", "clone")),
+        ),
+        ThemeVibe(
+            "crime", "Crime Sagas", "Gritty & gripping", "🔫",
+            "Gangsters, cops and the line between them.",
+            ColorProfile(0xFF2B2B2B, 0xFFB0BEC5), listOf("Crime"), ThemeRule(genres = listOf("Crime")),
+        ),
+        ThemeVibe(
+            "war", "War & Valor", "Courage under fire", "🎖️",
+            "Battlefields, history and the people who lived it.",
+            ColorProfile(0xFF3E4A2E, 0xFFA5B67A), listOf("War", "History"), ThemeRule(genres = listOf("War", "History")),
+        ),
+        ThemeVibe(
+            "family", "Family Movie Night", "Everyone on the sofa", "🍿",
+            "Adventures every age can enjoy together.",
+            ColorProfile(0xFF1E6B4A, 0xFFFFCA28), listOf("Family", "Animation"), ThemeRule(genres = listOf("Family")),
+        ),
+        ThemeVibe(
+            "music", "Music & Rhythm", "Turn it up", "🎵",
+            "Bands, prodigies and stories that move to a beat.",
+            ColorProfile(0xFF4A1E6B, 0xFFE040FB), listOf("Music"),
+            ThemeRule(genres = listOf("Music"), keywords = listOf("music", "band", "jazz", "drummer", "ballet", "queen")),
+        ),
+        ThemeVibe(
+            "sports", "Game Day", "Win or go home", "🏆",
+            "Underdogs, coaches and the will to win.",
+            ColorProfile(0xFF0E4A7A, 0xFF4FC3F7), listOf("Sport"),
+            ThemeRule(genres = listOf("Sport"), keywords = listOf("football", "baseball", "chess", "boxing", "coach")),
+        ),
+        ThemeVibe(
+            "binge", "Binge-Worthy Series", "Just one more episode", "📺",
+            "Top-rated shows you won't be able to stop.",
+            ColorProfile(0xFF1E3A6B, 0xFF7C4DFF), emptyList(), ThemeRule(mediaType = MediaType.SERIES, minRating = 8.3),
+        ),
+        ThemeVibe(
+            "classics", "Timeless Classics", "Golden era", "🎞️",
+            "Films from before 1990 that still hold up.",
+            ColorProfile(0xFF4A3B1E, 0xFFD7B98E), emptyList(), ThemeRule(maxYear = 1989),
+        ),
+        ThemeVibe(
+            "nineties", "90s Nostalgia", "Rewind the tape", "📼",
+            "The decade of VHS, blockbusters and cult hits.",
+            ColorProfile(0xFF5A1E5A, 0xFF00E5FF), emptyList(), ThemeRule(minYear = 1990, maxYear = 1999),
+        ),
+        ThemeVibe(
+            "fresh", "Fresh Picks", "Recent & buzzing", "✨",
+            "Highlights from the last few years.",
+            ColorProfile(0xFF0E5A5A, 0xFF64FFDA), emptyList(), ThemeRule(minYear = 2019),
+        ),
+        ThemeVibe(
+            "toprated", "Top Rated", "The very best", "⭐",
+            "Titles rated 8.6 or higher on IMDb.",
+            ColorProfile(0xFF5A4A00, 0xFFF5C518), emptyList(), ThemeRule(minRating = 8.6),
         ),
     )
 

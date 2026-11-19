@@ -17,9 +17,42 @@ data class ThemeVibe(
     val emoji: String,
     val description: String,
     val colors: ColorProfile,
-    /** Genres that characterise the vibe; used as fallback when filters empty its own shelf. */
+    /**
+     * The vibe's identity genres. With a genre filter active the vibe is only offered when one of
+     * these is selected (vibes with none, like "Top Rated", are genre-neutral and always eligible).
+     * Curated vibes also borrow titles with these genres when filters thin out their own shelf.
+     */
     val seedGenres: List<String>,
-)
+    /** Rule-based vibes collect titles from the whole catalog instead of a hand-picked shelf. */
+    val rule: ThemeRule? = null,
+) {
+    fun contains(item: MediaItem): Boolean = rule?.matches(item) ?: (item.themeId == id)
+}
+
+/**
+ * Membership rule for a vibe without a curated shelf. A title must match one of [genres] or
+ * [keywords] (when either is given) and every format/year/rating bound.
+ */
+data class ThemeRule(
+    val genres: List<String> = emptyList(),
+    val keywords: List<String> = emptyList(),
+    val mediaType: MediaType? = null,
+    val minYear: Int? = null,
+    val maxYear: Int? = null,
+    val minRating: Double? = null,
+) {
+    fun matches(item: MediaItem): Boolean {
+        if (mediaType != null && item.type != mediaType) return false
+        if (minYear != null && item.year < minYear) return false
+        if (maxYear != null && item.year > maxYear) return false
+        if (minRating != null && item.rating < minRating) return false
+        if (genres.isEmpty() && keywords.isEmpty()) return true
+        if (item.genres.any { it in genres }) return true
+        if (keywords.isEmpty()) return false
+        val words = (item.keywords + item.title.lowercase().split(Regex("[^\\p{L}\\p{N}]+"))).map { it.lowercase() }
+        return words.any { it in keywords }
+    }
+}
 
 enum class ItemSource { CURATED, AI }
 
