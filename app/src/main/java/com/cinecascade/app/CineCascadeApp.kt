@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 
 class CineCascadeApp : Application(), ImageLoaderFactory {
 
-    private val http by lazy {
+    val http: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)

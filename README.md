@@ -62,3 +62,11 @@ OMDb anropas via **https** (`https://www.omdbapi.com/?apikey=…&t=…&y=…`), 
 ```
 
 GitHub Actions (`.github/workflows/android.yml`) kör testerna och bygger en debug-APK vid varje push. APK:n kan laddas ner under fliken *Actions* → körningen → *Artifacts*.
+
+## Automatiska uppdateringar
+
+Varje push bygger en ny APK och publicerar den som en GitHub Release (`v<byggnummer>`). När appen öppnas på wifi frågar den GitHub efter den senaste releasen. Är den nyare än den installerade versionen laddas den ner i bakgrunden, och en ruta frågar om du vill installera. Android kräver alltid att du själv trycker *Installera*. Första gången ber Android också om tillåtelse för CineCascade att installera appar.
+
+Alla byggen signeras med samma nyckel (`app/cinecascade-debug.keystore`, Androids publika standardlösenord för debug-nycklar), annars vägrar Android att uppdatera.
+
+Obs! Nycklarna (OMDb/Gemini) byggs in i APK:n, och APK:n ligger publikt under Releases. Använd därför bara nycklar utan kostnad (Gemini free tier utan betalkonto).

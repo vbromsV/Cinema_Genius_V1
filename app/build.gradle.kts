@@ -25,13 +25,29 @@ android {
         applicationId = "com.cinecascade.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "0.1.0"
+        // CI passes the build number so every published APK is newer than the last.
+        val buildNumber = System.getenv("VERSION_CODE")?.toIntOrNull() ?: 1
+        versionCode = buildNumber
+        versionName = "0.2.$buildNumber"
 
         // Keys are never committed: put them in local.properties (or CI secrets).
         buildConfigField("String", "OMDB_API_KEY", "\"${secret("OMDB_API_KEY")}\"")
         buildConfigField("String", "GEMINI_API_KEY", "\"${secret("GEMINI_API_KEY")}\"")
         buildConfigField("String", "GEMINI_MODEL", "\"${secret("GEMINI_MODEL", "gemini-3.5-flash")}\"")
+        // Public GitHub repo whose Releases the in-app updater checks.
+        buildConfigField("String", "UPDATE_REPO", "\"${System.getenv("GITHUB_REPOSITORY") ?: secret("UPDATE_REPO", "vbromsV/Cinema_Genius_V1")}\"")
+    }
+
+    // One fixed debug signing key for every build, so a new APK can install over the old one
+    // (Android refuses updates signed with a different key). Uses the standard, public
+    // Android debug-keystore passwords; it is not meant for Play Store releases.
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("cinecascade-debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
     }
 
     buildTypes {
