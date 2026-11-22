@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -26,8 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cinecascade.app.ui.theme.CineColors
@@ -36,6 +39,27 @@ import com.cinecascade.core.model.MediaItem
 import com.cinecascade.core.model.MediaType
 import com.cinecascade.core.model.ThemeVibe
 import java.util.Locale
+
+private val TITLE_LINE = 20.sp
+private val META_LINE = 17.sp
+private val PEOPLE_LINE = 15.sp
+private val REASONS_LINE = 14.sp
+private val SYNOPSIS_LINE = 14.sp
+private val PANEL_PADDING = 12.dp
+private val LINE_GAP = 3.dp
+private val THUMB_HEIGHT = 96.dp
+
+/**
+ * Fixed height of the bottom panel, sized for its tallest content (five text rows, synopsis on two
+ * lines) at the phone's text size. It never changes with the focused title, so the carousels
+ * above keep exactly the same space while you scroll.
+ */
+@Composable
+internal fun focusPanelHeight(): Dp = with(LocalDensity.current) {
+    val text = (TITLE_LINE.value + META_LINE.value + PEOPLE_LINE.value + REASONS_LINE.value + SYNOPSIS_LINE.value * 2).sp.toDp()
+    val content = maxOf(text + LINE_GAP * 4, THUMB_HEIGHT)
+    content + PANEL_PADDING * 2 + 4.dp
+}
 
 /** What the bottom panel shows: the focused theme or title of Slot 2. */
 private sealed interface FocusTarget {
@@ -88,22 +112,23 @@ internal fun FocusPanel(
 
 @Composable
 private fun ImdbDetail(item: MediaItem, reasons: List<String>, accent: Color) {
-    Row(Modifier.fillMaxSize().padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+    Row(Modifier.fillMaxSize().padding(PANEL_PADDING), verticalAlignment = Alignment.CenterVertically) {
         val look = CardLook(64.dp, 96.dp, 8.dp, detail = 0f, badge = 0f, saturation = 1f, glow = 0f, glowColor = accent)
         Box(Modifier.size(64.dp, 96.dp).clip(RoundedCornerShape(8.dp))) {
             PosterImage(item.imageUrl, item.title, 1f, Modifier.fillMaxSize()) { PosterPlaceholder(item, look) }
         }
         Spacer(Modifier.width(12.dp))
-        Column(Modifier.fillMaxHeight(), verticalArrangement = Arrangement.spacedBy(3.dp, Alignment.CenterVertically)) {
+        Column(Modifier.fillMaxHeight(), verticalArrangement = Arrangement.spacedBy(LINE_GAP, Alignment.CenterVertically)) {
             Text(
                 item.title,
                 color = CineColors.TextPrimary,
                 fontSize = 16.sp,
+                lineHeight = TITLE_LINE,
                 fontWeight = FontWeight.Bold,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.height(with(LocalDensity.current) { META_LINE.toDp() }), verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     "IMDb",
                     color = Color.Black,
@@ -129,13 +154,14 @@ private fun ImdbDetail(item: MediaItem, reasons: List<String>, accent: Color) {
                 if (item.cast.isNotEmpty()) add(item.cast.take(2).joinToString())
             }.joinToString("  ·  ")
             if (people.isNotEmpty()) {
-                Text(people, color = CineColors.TextSecondary, fontSize = 11.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                Text(people, color = CineColors.TextSecondary, fontSize = 11.sp, lineHeight = PEOPLE_LINE, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
             if (reasons.isNotEmpty()) {
                 Text(
                     "MATCH  ·  " + reasons.take(3).joinToString("  ·  "),
                     color = accent,
                     fontSize = 10.sp,
+                    lineHeight = REASONS_LINE,
                     fontWeight = FontWeight.SemiBold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -145,7 +171,7 @@ private fun ImdbDetail(item: MediaItem, reasons: List<String>, accent: Color) {
                 item.synopsis,
                 color = CineColors.TextPrimary.copy(alpha = 0.78f),
                 fontSize = 11.sp,
-                lineHeight = 14.sp,
+                lineHeight = SYNOPSIS_LINE,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
             )

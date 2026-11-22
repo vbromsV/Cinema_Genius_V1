@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.cinecascade.app.ui.components.CascadeStack
 import com.cinecascade.app.ui.components.Curtain
 import com.cinecascade.app.ui.components.FocusPanel
+import com.cinecascade.app.ui.components.focusPanelHeight
 import com.cinecascade.app.ui.components.FormatCurtainContent
 import com.cinecascade.app.ui.components.GenreCurtainContent
 import com.cinecascade.app.ui.components.TopBar
@@ -85,7 +86,7 @@ fun DiscoveryScreen(state: DiscoveryUiState, catalog: Map<String, MediaItem>, ac
                 modifier = Modifier
                     .padding(start = 14.dp, end = 14.dp, top = 4.dp, bottom = 12.dp)
                     .fillMaxWidth()
-                    .height(132.dp),
+                    .height(focusPanelHeight()),
             )
         }
 
